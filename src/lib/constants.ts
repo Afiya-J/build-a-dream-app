@@ -18,7 +18,15 @@ export const SEMESTERS = [
   "Semester 8",
 ] as const;
 
+export const SEMESTERS_BY_YEAR = {
+  "1st Year": ["Semester 1", "Semester 2"],
+  "2nd Year": ["Semester 3", "Semester 4"],
+  "3rd Year": ["Semester 5", "Semester 6"],
+  "4th Year": ["Semester 7", "Semester 8"],
+} as const satisfies Record<(typeof YEARS)[number], readonly string[]>;
+
 export const RESOURCE_TYPES = ["Notes", "PYQs", "Videos", "Websites"] as const;
+
 
 export const EVENT_CATEGORIES = [
   "Workshop",
