@@ -1,18 +1,20 @@
 import { Link } from "@tanstack/react-router";
+import type { LinkProps } from "@tanstack/react-router";
 import { ArrowLeft, GraduationCap, User } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { APP_NAME } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-interface TopBarProps {
-  title?: string;
-  showBrand?: boolean;
-  showProfile?: boolean;
-  backTo?: string;
+export interface TopBarProps {
+  title?: string | undefined;
+  showBrand?: boolean | undefined;
+  showProfile?: boolean | undefined;
+  backTo?: LinkProps["to"] | undefined;
   actions?: ReactNode;
-  className?: string;
+  className?: string | undefined;
 }
+
 
 export function TopBar({
   title,
