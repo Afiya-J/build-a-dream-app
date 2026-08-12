@@ -36,7 +36,10 @@ export const Route = createFileRoute("/register")({
 function RegisterPage() {
   const [year, setYear] = useState<string>("");
 
-  const semesters = year ? SEMESTERS_BY_YEAR[Number(year) as (typeof YEARS)[number]] : [];
+  const semesters: readonly string[] = year
+    ? SEMESTERS_BY_YEAR[year as (typeof YEARS)[number]]
+    : [];
+
 
   return (
     <main className="flex min-h-screen items-start justify-center bg-background px-5 py-10">
