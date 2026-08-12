@@ -1,0 +1,25 @@
+{
+  "name": "CampusLife — KRCT",
+  "short_name": "CampusLife",
+  "description": "Study resources, campus events, resource sharing and lost & found for KRCT students.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F8FAFC",
+  "theme_color": "#3730A3",
+  "icons": [
+    {
+      "src": "/icons/campuslife-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/campuslife-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
