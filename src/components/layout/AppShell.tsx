@@ -2,17 +2,19 @@ import type { ReactNode } from "react";
 
 import { BottomNav } from "@/components/layout/BottomNav";
 import { TopBar } from "@/components/layout/TopBar";
+import type { TopBarProps } from "@/components/layout/TopBar";
 import { mockUnreadMessageCount } from "@/data/mock";
 import { cn } from "@/lib/utils";
 
 interface AppShellProps {
   children: ReactNode;
-  title?: string;
-  showBrand?: boolean;
-  backTo?: "/home" | "/resources" | "/events" | "/messages" | "/profile" | "/lost-found" | "/sharing";
+  title?: string | undefined;
+  showBrand?: boolean | undefined;
+  backTo?: TopBarProps["backTo"];
   actions?: ReactNode;
-  className?: string;
+  className?: string | undefined;
 }
+
 
 /** Shared chrome for authenticated screens: top bar, content area and navigation. */
 export function AppShell({
