@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
@@ -39,6 +40,10 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -50,128 +55,128 @@ const RegisterRoute = RegisterRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
-  id: '/_authenticated/admin',
+  id: '/admin',
   path: '/admin',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
-  id: '/_authenticated/home',
+  id: '/home',
   path: '/home',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedEventsIndexRoute =
   AuthenticatedEventsIndexRouteImport.update({
-    id: '/_authenticated/events/',
+    id: '/events/',
     path: '/events/',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedEventsCreateRoute =
   AuthenticatedEventsCreateRouteImport.update({
-    id: '/_authenticated/events/create',
+    id: '/events/create',
     path: '/events/create',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedEventsSavedRoute =
   AuthenticatedEventsSavedRouteImport.update({
-    id: '/_authenticated/events/saved',
+    id: '/events/saved',
     path: '/events/saved',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedLostFoundIndexRoute =
   AuthenticatedLostFoundIndexRouteImport.update({
-    id: '/_authenticated/lost-found/',
+    id: '/lost-found/',
     path: '/lost-found/',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedLostFoundIdRoute =
   AuthenticatedLostFoundIdRouteImport.update({
-    id: '/_authenticated/lost-found/$id',
+    id: '/lost-found/$id',
     path: '/lost-found/$id',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedLostFoundCreateRoute =
   AuthenticatedLostFoundCreateRouteImport.update({
-    id: '/_authenticated/lost-found/create',
+    id: '/lost-found/create',
     path: '/lost-found/create',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedMessagesIndexRoute =
   AuthenticatedMessagesIndexRouteImport.update({
-    id: '/_authenticated/messages/',
+    id: '/messages/',
     path: '/messages/',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedMessagesConversationIdRoute =
   AuthenticatedMessagesConversationIdRouteImport.update({
-    id: '/_authenticated/messages/$conversationId',
+    id: '/messages/$conversationId',
     path: '/messages/$conversationId',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedProfileIndexRoute =
   AuthenticatedProfileIndexRouteImport.update({
-    id: '/_authenticated/profile/',
+    id: '/profile/',
     path: '/profile/',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedProfileChangePasswordRoute =
   AuthenticatedProfileChangePasswordRouteImport.update({
-    id: '/_authenticated/profile/change-password',
+    id: '/profile/change-password',
     path: '/profile/change-password',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedResourcesIndexRoute =
   AuthenticatedResourcesIndexRouteImport.update({
-    id: '/_authenticated/resources/',
+    id: '/resources/',
     path: '/resources/',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedResourcesIdRoute =
   AuthenticatedResourcesIdRouteImport.update({
-    id: '/_authenticated/resources/$id',
+    id: '/resources/$id',
     path: '/resources/$id',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedResourcesUploadRoute =
   AuthenticatedResourcesUploadRouteImport.update({
-    id: '/_authenticated/resources/upload',
+    id: '/resources/upload',
     path: '/resources/upload',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedSharingIndexRoute =
   AuthenticatedSharingIndexRouteImport.update({
-    id: '/_authenticated/sharing/',
+    id: '/sharing/',
     path: '/sharing/',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedSharingCreateRoute =
   AuthenticatedSharingCreateRouteImport.update({
-    id: '/_authenticated/sharing/create',
+    id: '/sharing/create',
     path: '/sharing/create',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedEventsIdIndexRoute =
   AuthenticatedEventsIdIndexRouteImport.update({
-    id: '/_authenticated/events/$id/',
+    id: '/events/$id/',
     path: '/events/$id/',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedEventsIdEditRoute =
   AuthenticatedEventsIdEditRouteImport.update({
-    id: '/_authenticated/events/$id/edit',
+    id: '/events/$id/edit',
     path: '/events/$id/edit',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedSharingIdIndexRoute =
   AuthenticatedSharingIdIndexRouteImport.update({
-    id: '/_authenticated/sharing/$id/',
+    id: '/sharing/$id/',
     path: '/sharing/$id/',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedSharingIdEditRoute =
   AuthenticatedSharingIdEditRouteImport.update({
-    id: '/_authenticated/sharing/$id/edit',
+    id: '/sharing/$id/edit',
     path: '/sharing/$id/edit',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -229,6 +234,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
@@ -309,6 +315,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/login'
     | '/register'
     | '/_authenticated/admin'
@@ -336,8 +343,192 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/home': {
+      id: '/_authenticated/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof AuthenticatedHomeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/events/': {
+      id: '/_authenticated/events/'
+      path: '/events'
+      fullPath: '/events/'
+      preLoaderRoute: typeof AuthenticatedEventsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/events/create': {
+      id: '/_authenticated/events/create'
+      path: '/events/create'
+      fullPath: '/events/create'
+      preLoaderRoute: typeof AuthenticatedEventsCreateRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/events/saved': {
+      id: '/_authenticated/events/saved'
+      path: '/events/saved'
+      fullPath: '/events/saved'
+      preLoaderRoute: typeof AuthenticatedEventsSavedRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/lost-found/': {
+      id: '/_authenticated/lost-found/'
+      path: '/lost-found'
+      fullPath: '/lost-found/'
+      preLoaderRoute: typeof AuthenticatedLostFoundIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/lost-found/$id': {
+      id: '/_authenticated/lost-found/$id'
+      path: '/lost-found/$id'
+      fullPath: '/lost-found/$id'
+      preLoaderRoute: typeof AuthenticatedLostFoundIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/lost-found/create': {
+      id: '/_authenticated/lost-found/create'
+      path: '/lost-found/create'
+      fullPath: '/lost-found/create'
+      preLoaderRoute: typeof AuthenticatedLostFoundCreateRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/messages/': {
+      id: '/_authenticated/messages/'
+      path: '/messages'
+      fullPath: '/messages/'
+      preLoaderRoute: typeof AuthenticatedMessagesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/messages/$conversationId': {
+      id: '/_authenticated/messages/$conversationId'
+      path: '/messages/$conversationId'
+      fullPath: '/messages/$conversationId'
+      preLoaderRoute: typeof AuthenticatedMessagesConversationIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/profile/': {
+      id: '/_authenticated/profile/'
+      path: '/profile'
+      fullPath: '/profile/'
+      preLoaderRoute: typeof AuthenticatedProfileIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/profile/change-password': {
+      id: '/_authenticated/profile/change-password'
+      path: '/profile/change-password'
+      fullPath: '/profile/change-password'
+      preLoaderRoute: typeof AuthenticatedProfileChangePasswordRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/resources/': {
+      id: '/_authenticated/resources/'
+      path: '/resources'
+      fullPath: '/resources/'
+      preLoaderRoute: typeof AuthenticatedResourcesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/resources/$id': {
+      id: '/_authenticated/resources/$id'
+      path: '/resources/$id'
+      fullPath: '/resources/$id'
+      preLoaderRoute: typeof AuthenticatedResourcesIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/resources/upload': {
+      id: '/_authenticated/resources/upload'
+      path: '/resources/upload'
+      fullPath: '/resources/upload'
+      preLoaderRoute: typeof AuthenticatedResourcesUploadRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sharing/': {
+      id: '/_authenticated/sharing/'
+      path: '/sharing'
+      fullPath: '/sharing/'
+      preLoaderRoute: typeof AuthenticatedSharingIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sharing/create': {
+      id: '/_authenticated/sharing/create'
+      path: '/sharing/create'
+      fullPath: '/sharing/create'
+      preLoaderRoute: typeof AuthenticatedSharingCreateRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/events/$id/': {
+      id: '/_authenticated/events/$id/'
+      path: '/events/$id'
+      fullPath: '/events/$id/'
+      preLoaderRoute: typeof AuthenticatedEventsIdIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/events/$id/edit': {
+      id: '/_authenticated/events/$id/edit'
+      path: '/events/$id/edit'
+      fullPath: '/events/$id/edit'
+      preLoaderRoute: typeof AuthenticatedEventsIdEditRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sharing/$id/': {
+      id: '/_authenticated/sharing/$id/'
+      path: '/sharing/$id'
+      fullPath: '/sharing/$id/'
+      preLoaderRoute: typeof AuthenticatedSharingIdIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sharing/$id/edit': {
+      id: '/_authenticated/sharing/$id/edit'
+      path: '/sharing/$id/edit'
+      fullPath: '/sharing/$id/edit'
+      preLoaderRoute: typeof AuthenticatedSharingIdEditRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+  }
+}
+
+interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
   AuthenticatedEventsCreateRoute: typeof AuthenticatedEventsCreateRoute
@@ -361,183 +552,7 @@ export interface RootRouteChildren {
   AuthenticatedSharingIdIndexRoute: typeof AuthenticatedSharingIdIndexRoute
 }
 
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/register': {
-      id: '/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof RegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/admin': {
-      id: '/_authenticated/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AuthenticatedAdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/home': {
-      id: '/_authenticated/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof AuthenticatedHomeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/events/': {
-      id: '/_authenticated/events/'
-      path: '/events'
-      fullPath: '/events/'
-      preLoaderRoute: typeof AuthenticatedEventsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/events/create': {
-      id: '/_authenticated/events/create'
-      path: '/events/create'
-      fullPath: '/events/create'
-      preLoaderRoute: typeof AuthenticatedEventsCreateRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/events/saved': {
-      id: '/_authenticated/events/saved'
-      path: '/events/saved'
-      fullPath: '/events/saved'
-      preLoaderRoute: typeof AuthenticatedEventsSavedRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/lost-found/': {
-      id: '/_authenticated/lost-found/'
-      path: '/lost-found'
-      fullPath: '/lost-found/'
-      preLoaderRoute: typeof AuthenticatedLostFoundIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/lost-found/$id': {
-      id: '/_authenticated/lost-found/$id'
-      path: '/lost-found/$id'
-      fullPath: '/lost-found/$id'
-      preLoaderRoute: typeof AuthenticatedLostFoundIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/lost-found/create': {
-      id: '/_authenticated/lost-found/create'
-      path: '/lost-found/create'
-      fullPath: '/lost-found/create'
-      preLoaderRoute: typeof AuthenticatedLostFoundCreateRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/messages/': {
-      id: '/_authenticated/messages/'
-      path: '/messages'
-      fullPath: '/messages/'
-      preLoaderRoute: typeof AuthenticatedMessagesIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/messages/$conversationId': {
-      id: '/_authenticated/messages/$conversationId'
-      path: '/messages/$conversationId'
-      fullPath: '/messages/$conversationId'
-      preLoaderRoute: typeof AuthenticatedMessagesConversationIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/profile/': {
-      id: '/_authenticated/profile/'
-      path: '/profile'
-      fullPath: '/profile/'
-      preLoaderRoute: typeof AuthenticatedProfileIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/profile/change-password': {
-      id: '/_authenticated/profile/change-password'
-      path: '/profile/change-password'
-      fullPath: '/profile/change-password'
-      preLoaderRoute: typeof AuthenticatedProfileChangePasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/resources/': {
-      id: '/_authenticated/resources/'
-      path: '/resources'
-      fullPath: '/resources/'
-      preLoaderRoute: typeof AuthenticatedResourcesIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/resources/$id': {
-      id: '/_authenticated/resources/$id'
-      path: '/resources/$id'
-      fullPath: '/resources/$id'
-      preLoaderRoute: typeof AuthenticatedResourcesIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/resources/upload': {
-      id: '/_authenticated/resources/upload'
-      path: '/resources/upload'
-      fullPath: '/resources/upload'
-      preLoaderRoute: typeof AuthenticatedResourcesUploadRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/sharing/': {
-      id: '/_authenticated/sharing/'
-      path: '/sharing'
-      fullPath: '/sharing/'
-      preLoaderRoute: typeof AuthenticatedSharingIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/sharing/create': {
-      id: '/_authenticated/sharing/create'
-      path: '/sharing/create'
-      fullPath: '/sharing/create'
-      preLoaderRoute: typeof AuthenticatedSharingCreateRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/events/$id/': {
-      id: '/_authenticated/events/$id/'
-      path: '/events/$id'
-      fullPath: '/events/$id/'
-      preLoaderRoute: typeof AuthenticatedEventsIdIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/events/$id/edit': {
-      id: '/_authenticated/events/$id/edit'
-      path: '/events/$id/edit'
-      fullPath: '/events/$id/edit'
-      preLoaderRoute: typeof AuthenticatedEventsIdEditRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/sharing/$id/': {
-      id: '/_authenticated/sharing/$id/'
-      path: '/sharing/$id'
-      fullPath: '/sharing/$id/'
-      preLoaderRoute: typeof AuthenticatedSharingIdIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/sharing/$id/edit': {
-      id: '/_authenticated/sharing/$id/edit'
-      path: '/sharing/$id/edit'
-      fullPath: '/sharing/$id/edit'
-      preLoaderRoute: typeof AuthenticatedSharingIdEditRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-  }
-}
-
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  LoginRoute: LoginRoute,
-  RegisterRoute: RegisterRoute,
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
   AuthenticatedEventsCreateRoute: AuthenticatedEventsCreateRoute,
@@ -561,6 +576,16 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedSharingIdEditRoute: AuthenticatedSharingIdEditRoute,
   AuthenticatedEventsIdIndexRoute: AuthenticatedEventsIdIndexRoute,
   AuthenticatedSharingIdIndexRoute: AuthenticatedSharingIdIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
