@@ -3,7 +3,7 @@ import { PackagePlus } from "lucide-react";
 
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 
-export const Route = createFileRoute("/_authenticated/_authenticated/lost-found/create")({
+export const Route = createFileRoute("/_authenticated/lost-found/create")({
   head: () => ({
     meta: [
       { title: "Post a found item — CampusLife" },

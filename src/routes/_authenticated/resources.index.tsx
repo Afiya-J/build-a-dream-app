@@ -3,7 +3,7 @@ import { BookOpen } from "lucide-react";
 
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 
-export const Route = createFileRoute("/_authenticated/_authenticated/resources/")({
+export const Route = createFileRoute("/_authenticated/resources/")({
   head: () => ({
     meta: [
       { title: "Study Resources — CampusLife" },

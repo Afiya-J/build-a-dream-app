@@ -3,7 +3,7 @@ import { PencilLine } from "lucide-react";
 
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 
-export const Route = createFileRoute("/_authenticated/_authenticated/sharing/$id/edit")({
+export const Route = createFileRoute("/_authenticated/sharing/$id/edit")({
   head: () => ({
     meta: [
       { title: "Edit listing — CampusLife" },

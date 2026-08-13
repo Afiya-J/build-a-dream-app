@@ -3,7 +3,7 @@ import { CalendarDays } from "lucide-react";
 
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 
-export const Route = createFileRoute("/_authenticated/_authenticated/events/$id/")({
+export const Route = createFileRoute("/_authenticated/events/$id/")({
   head: () => ({
     meta: [
       { title: "Event details — CampusLife" },

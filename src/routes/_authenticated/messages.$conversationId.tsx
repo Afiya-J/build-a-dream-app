@@ -3,7 +3,7 @@ import { MessageCircle } from "lucide-react";
 
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 
-export const Route = createFileRoute("/_authenticated/_authenticated/messages/$conversationId")({
+export const Route = createFileRoute("/_authenticated/messages/$conversationId")({
   head: () => ({
     meta: [
       { title: "Conversation — CampusLife" },

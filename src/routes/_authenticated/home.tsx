@@ -9,7 +9,7 @@ import { AppShell } from "@/components/layout/AppShell";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { mockRecentResources, mockStudent, mockUpcomingEvents } from "@/data/mock";
 
-export const Route = createFileRoute("/_authenticated/_authenticated/home")({
+export const Route = createFileRoute("/_authenticated/home")({
   head: () => ({
     meta: [
       { title: "Home — CampusLife" },
