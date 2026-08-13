@@ -3,7 +3,7 @@ import { UserRound } from "lucide-react";
 
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 
-export const Route = createFileRoute("/profile/")({
+export const Route = createFileRoute("/_authenticated/_authenticated/profile/")({
   head: () => ({
     meta: [
       { title: "Profile — CampusLife" },

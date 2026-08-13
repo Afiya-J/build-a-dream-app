@@ -3,7 +3,7 @@ import { Bookmark } from "lucide-react";
 
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 
-export const Route = createFileRoute("/events/saved")({
+export const Route = createFileRoute("/_authenticated/_authenticated/events/saved")({
   head: () => ({
     meta: [
       { title: "Saved Events — CampusLife" },

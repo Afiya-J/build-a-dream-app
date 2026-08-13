@@ -3,7 +3,7 @@ import { KeyRound } from "lucide-react";
 
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 
-export const Route = createFileRoute("/profile/change-password")({
+export const Route = createFileRoute("/_authenticated/_authenticated/profile/change-password")({
   head: () => ({
     meta: [
       { title: "Change password — CampusLife" },
