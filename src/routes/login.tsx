@@ -3,7 +3,7 @@ import { GraduationCap } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { FieldError } from "@/components/ui/FieldError";
+import { FormError } from "@/components/ui/FieldError";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
@@ -88,7 +88,7 @@ function LoginPage() {
               onChange={(e) => setRegistrationNumber(e.target.value)}
               disabled={submitting}
             />
-            <FieldError message={errors.registrationNumber} />
+            <FormError message={errors.registrationNumber} />
           </div>
 
           <div className="space-y-1.5">
@@ -104,14 +104,10 @@ function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               disabled={submitting}
             />
-            <FieldError message={errors.password} />
+            <FormError message={errors.password} />
           </div>
 
-          {formError ? (
-            <p role="alert" className="rounded-xl bg-destructive/10 px-3 py-2 text-sm text-destructive">
-              {formError}
-            </p>
-          ) : null}
+          <FormError message={formError} />
 
           <Button type="submit" className="h-11 w-full" disabled={submitting}>
             {submitting ? (
