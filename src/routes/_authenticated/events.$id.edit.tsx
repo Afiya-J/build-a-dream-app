@@ -3,7 +3,7 @@ import { PencilLine } from "lucide-react";
 
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 
-export const Route = createFileRoute("/events/$id/edit")({
+export const Route = createFileRoute("/_authenticated/events/$id/edit")({
   head: () => ({
     meta: [
       { title: "Edit event — CampusLife" },

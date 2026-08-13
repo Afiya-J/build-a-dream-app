@@ -1,10 +1,15 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { GraduationCap } from "lucide-react";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { FormError } from "@/components/ui/FieldError";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
+import { useRedirectIfAuthenticated } from "@/hooks/use-auth";
 import { APP_NAME, COLLEGE_NAME } from "@/lib/constants";
+import { signInWithRegistrationNumber } from "@/stores/auth-store";
 
 export const Route = createFileRoute("/login")({
   head: () => ({
@@ -25,6 +30,36 @@ export const Route = createFileRoute("/login")({
 });
 
 function LoginPage() {
+  useRedirectIfAuthenticated();
+  const navigate = useNavigate();
+
+  const [registrationNumber, setRegistrationNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<{ registrationNumber?: string; password?: string }>({});
+  const [formError, setFormError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (submitting) return;
+
+    const nextErrors: typeof errors = {};
+    if (!registrationNumber.trim()) nextErrors.registrationNumber = "Registration number is required";
+    if (!password) nextErrors.password = "Password is required";
+    setErrors(nextErrors);
+    setFormError(null);
+    if (Object.keys(nextErrors).length > 0) return;
+
+    setSubmitting(true);
+    const { error } = await signInWithRegistrationNumber(registrationNumber, password);
+    if (error) {
+      setFormError(error);
+      setSubmitting(false);
+      return;
+    }
+    void navigate({ to: "/home", replace: true });
+  }
+
   return (
     <main className="flex min-h-screen items-center justify-center bg-background px-5 py-10">
       <div className="w-full max-w-sm">
@@ -38,7 +73,7 @@ function LoginPage() {
 
         <form
           className="space-y-4 rounded-2xl border border-border bg-card p-5 shadow-card"
-          onSubmit={(event) => event.preventDefault()}
+          onSubmit={handleSubmit}
         >
           <div className="space-y-1.5">
             <Label htmlFor="registration-number">Registration number</Label>
@@ -49,7 +84,11 @@ function LoginPage() {
               inputMode="numeric"
               placeholder="e.g. 811722104001"
               className="h-11"
+              value={registrationNumber}
+              onChange={(e) => setRegistrationNumber(e.target.value)}
+              disabled={submitting}
             />
+            <FormError message={errors.registrationNumber} />
           </div>
 
           <div className="space-y-1.5">
@@ -61,11 +100,24 @@ function LoginPage() {
               autoComplete="current-password"
               placeholder="Enter your password"
               className="h-11"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={submitting}
             />
+            <FormError message={errors.password} />
           </div>
 
-          <Button type="submit" className="h-11 w-full">
-            Sign in
+          <FormError message={formError} />
+
+          <Button type="submit" className="h-11 w-full" disabled={submitting}>
+            {submitting ? (
+              <span className="flex items-center gap-2">
+                <LoadingSpinner size="sm" className="text-primary-foreground" />
+                Signing in…
+              </span>
+            ) : (
+              "Sign in"
+            )}
           </Button>
 
           <p className="text-center text-sm text-muted-foreground">

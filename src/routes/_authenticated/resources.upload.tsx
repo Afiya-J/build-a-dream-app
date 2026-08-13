@@ -3,7 +3,7 @@ import { Upload } from "lucide-react";
 
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 
-export const Route = createFileRoute("/resources/upload")({
+export const Route = createFileRoute("/_authenticated/resources/upload")({
   head: () => ({
     meta: [
       { title: "Upload a resource — CampusLife" },

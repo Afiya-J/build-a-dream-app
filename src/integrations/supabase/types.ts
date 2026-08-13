@@ -14,13 +14,83 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      colleges: {
+        Row: {
+          code: string
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          college_id: string | null
+          created_at: string
+          department: string
+          full_name: string
+          id: string
+          is_active: boolean
+          registration_number: string
+          role: string
+          semester: number
+          updated_at: string
+          year: number
+        }
+        Insert: {
+          college_id?: string | null
+          created_at?: string
+          department: string
+          full_name: string
+          id: string
+          is_active?: boolean
+          registration_number: string
+          role?: string
+          semester: number
+          updated_at?: string
+          year: number
+        }
+        Update: {
+          college_id?: string | null
+          created_at?: string
+          department?: string
+          full_name?: string
+          id?: string
+          is_active?: boolean
+          registration_number?: string
+          role?: string
+          semester?: number
+          updated_at?: string
+          year?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_college_id_fkey"
+            columns: ["college_id"]
+            isOneToOne: false
+            referencedRelation: "colleges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never

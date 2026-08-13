@@ -3,7 +3,7 @@ import { CalendarPlus } from "lucide-react";
 
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 
-export const Route = createFileRoute("/events/create")({
+export const Route = createFileRoute("/_authenticated/events/create")({
   head: () => ({
     meta: [
       { title: "Post an event — CampusLife" },

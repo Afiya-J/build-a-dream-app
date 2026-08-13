@@ -3,7 +3,7 @@ import { PackageOpen } from "lucide-react";
 
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 
-export const Route = createFileRoute("/sharing/")({
+export const Route = createFileRoute("/_authenticated/sharing/")({
   head: () => ({
     meta: [
       { title: "Resource Sharing — CampusLife" },

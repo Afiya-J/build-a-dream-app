@@ -3,7 +3,7 @@ import { FileText } from "lucide-react";
 
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 
-export const Route = createFileRoute("/resources/$id")({
+export const Route = createFileRoute("/_authenticated/resources/$id")({
   head: () => ({
     meta: [
       { title: "Resource details — CampusLife" },
