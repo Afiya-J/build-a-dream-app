@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { GraduationCap } from "lucide-react";
 import { useEffect } from "react";
 
+import { useAuth } from "@/hooks/use-auth";
 import { APP_NAME, APP_TAGLINE, COLLEGE_SHORT_NAME } from "@/lib/constants";
 
 export const Route = createFileRoute("/")({
