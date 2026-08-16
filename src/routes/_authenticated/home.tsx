@@ -7,7 +7,9 @@ import { QuickActionFab } from "@/components/home/QuickActionFab";
 import { ResourcePreviewCard } from "@/components/home/ResourcePreviewCard";
 import { AppShell } from "@/components/layout/AppShell";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { mockRecentResources, mockStudent, mockUpcomingEvents } from "@/data/mock";
+import { mockRecentResources, mockUpcomingEvents } from "@/data/mock";
+import { useAuth } from "@/hooks/use-auth";
+import { firstName, formatSemester, formatYear } from "@/lib/auth";
 
 export const Route = createFileRoute("/_authenticated/home")({
   head: () => ({
@@ -36,6 +38,8 @@ function greeting() {
 }
 
 function HomePage() {
+  const { profile } = useAuth();
+
   return (
     <AppShell showBrand>
       <section className="rounded-2xl bg-primary px-5 py-6 shadow-raised">
@@ -43,11 +47,13 @@ function HomePage() {
           {greeting()}
         </p>
         <h1 className="mt-1 truncate text-2xl font-bold tracking-tight text-primary-foreground">
-          {mockStudent.fullName}
+          {profile ? firstName(profile.full_name) : "Student"}
         </h1>
-        <p className="mt-2 text-sm text-primary-foreground/80">
-          {mockStudent.department} · {mockStudent.year} · {mockStudent.semester}
-        </p>
+        {profile ? (
+          <p className="mt-2 text-sm text-primary-foreground/80">
+            {profile.department} · {formatYear(profile.year)} · {formatSemester(profile.semester)}
+          </p>
+        ) : null}
       </section>
 
       <section aria-labelledby="features-heading" className="mt-6">

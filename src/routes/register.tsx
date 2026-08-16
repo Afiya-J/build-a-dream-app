@@ -1,10 +1,12 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { GraduationCap } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { FormError } from "@/components/ui/FieldError";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import {
   Select,
   SelectContent,
@@ -12,7 +14,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { APP_NAME, DEPARTMENTS, SEMESTERS_BY_YEAR, YEARS } from "@/lib/constants";
+import { useRedirectIfAuthenticated } from "@/hooks/use-auth";
+import { formatSemester, formatYear } from "@/lib/auth";
+import { APP_NAME, DEPARTMENTS } from "@/lib/constants";
+import { registerStudent } from "@/stores/auth-store";
 
 export const Route = createFileRoute("/register")({
   head: () => ({
@@ -33,13 +38,81 @@ export const Route = createFileRoute("/register")({
   component: RegisterPage,
 });
 
+const YEAR_OPTIONS = [1, 2, 3, 4] as const;
+const SEMESTERS_FOR_YEAR: Record<number, readonly number[]> = {
+  1: [1, 2],
+  2: [3, 4],
+  3: [5, 6],
+  4: [7, 8],
+};
+
+interface FieldErrors {
+  fullName?: string;
+  registrationNumber?: string;
+  department?: string;
+  year?: string;
+  semester?: string;
+  password?: string;
+  confirmPassword?: string;
+}
+
 function RegisterPage() {
-  const [year, setYear] = useState<string>("");
+  useRedirectIfAuthenticated();
+  const navigate = useNavigate();
 
-  const semesters: readonly string[] = year
-    ? SEMESTERS_BY_YEAR[year as (typeof YEARS)[number]]
-    : [];
+  const [fullName, setFullName] = useState("");
+  const [registrationNumber, setRegistrationNumber] = useState("");
+  const [department, setDepartment] = useState("");
+  const [year, setYear] = useState("");
+  const [semester, setSemester] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const [formError, setFormError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
+  const semesters = year ? (SEMESTERS_FOR_YEAR[Number(year)] ?? []) : [];
+
+  function handleYearChange(value: string) {
+    setYear(value);
+    setSemester("");
+  }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (submitting) return;
+
+    const next: FieldErrors = {};
+    if (!fullName.trim()) next.fullName = "Full name is required";
+    if (!registrationNumber.trim()) next.registrationNumber = "Registration number is required";
+    if (!department) next.department = "Select your department";
+    if (!year) next.year = "Select your year";
+    if (!semester) next.semester = "Select your semester";
+    if (password.length < 6) next.password = "Use at least 6 characters";
+    if (!confirmPassword) next.confirmPassword = "Confirm your password";
+    else if (confirmPassword !== password) next.confirmPassword = "Passwords do not match";
+
+    setErrors(next);
+    setFormError(null);
+    if (Object.keys(next).length > 0) return;
+
+    setSubmitting(true);
+    const { error } = await registerStudent({
+      fullName,
+      registrationNumber,
+      department,
+      year: Number(year),
+      semester: Number(semester),
+      password,
+    });
+
+    if (error) {
+      setFormError(error);
+      setSubmitting(false);
+      return;
+    }
+    void navigate({ to: "/home", replace: true });
+  }
 
   return (
     <main className="flex min-h-screen items-start justify-center bg-background px-5 py-10">
@@ -56,11 +129,20 @@ function RegisterPage() {
 
         <form
           className="space-y-4 rounded-2xl border border-border bg-card p-5 shadow-card"
-          onSubmit={(event) => event.preventDefault()}
+          onSubmit={handleSubmit}
         >
           <div className="space-y-1.5">
             <Label htmlFor="full-name">Full name</Label>
-            <Input id="full-name" name="fullName" autoComplete="name" className="h-11" />
+            <Input
+              id="full-name"
+              name="fullName"
+              autoComplete="name"
+              className="h-11"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              disabled={submitting}
+            />
+            <FormError message={errors.fullName} />
           </div>
 
           <div className="space-y-1.5">
@@ -72,12 +154,21 @@ function RegisterPage() {
               autoComplete="username"
               placeholder="e.g. 811722104001"
               className="h-11"
+              value={registrationNumber}
+              onChange={(e) => setRegistrationNumber(e.target.value)}
+              disabled={submitting}
             />
+            <FormError message={errors.registrationNumber} />
           </div>
 
           <div className="space-y-1.5">
             <Label htmlFor="department">Department</Label>
-            <Select name="department">
+            <Select
+              name="department"
+              value={department}
+              onValueChange={setDepartment}
+              disabled={submitting}
+            >
               <SelectTrigger id="department" className="h-11">
                 <SelectValue placeholder="Select department" />
               </SelectTrigger>
@@ -89,39 +180,52 @@ function RegisterPage() {
                 ))}
               </SelectContent>
             </Select>
+            <FormError message={errors.department} />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <Label htmlFor="year">Year</Label>
-              <Select name="year" value={year} onValueChange={setYear}>
+              <Select
+                name="year"
+                value={year}
+                onValueChange={handleYearChange}
+                disabled={submitting}
+              >
                 <SelectTrigger id="year" className="h-11">
                   <SelectValue placeholder="Year" />
                 </SelectTrigger>
                 <SelectContent>
-                  {YEARS.map((y) => (
+                  {YEAR_OPTIONS.map((y) => (
                     <SelectItem key={y} value={String(y)}>
-                      Year {y}
+                      {formatYear(y)}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
+              <FormError message={errors.year} />
             </div>
 
             <div className="space-y-1.5">
               <Label htmlFor="semester">Semester</Label>
-              <Select name="semester" disabled={!year}>
+              <Select
+                name="semester"
+                value={semester}
+                onValueChange={setSemester}
+                disabled={!year || submitting}
+              >
                 <SelectTrigger id="semester" className="h-11">
                   <SelectValue placeholder="Semester" />
                 </SelectTrigger>
                 <SelectContent>
                   {semesters.map((sem) => (
                     <SelectItem key={sem} value={String(sem)}>
-                      Semester {sem}
+                      {formatSemester(sem)}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
+              <FormError message={errors.semester} />
             </div>
           </div>
 
@@ -133,11 +237,39 @@ function RegisterPage() {
               type="password"
               autoComplete="new-password"
               className="h-11"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={submitting}
             />
+            <FormError message={errors.password} />
           </div>
 
-          <Button type="submit" className="h-11 w-full">
-            Create account
+          <div className="space-y-1.5">
+            <Label htmlFor="confirm-password">Confirm password</Label>
+            <Input
+              id="confirm-password"
+              name="confirmPassword"
+              type="password"
+              autoComplete="new-password"
+              className="h-11"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              disabled={submitting}
+            />
+            <FormError message={errors.confirmPassword} />
+          </div>
+
+          <FormError message={formError} />
+
+          <Button type="submit" className="h-11 w-full" disabled={submitting}>
+            {submitting ? (
+              <span className="flex items-center gap-2">
+                <LoadingSpinner size="sm" className="text-primary-foreground" />
+                Creating account…
+              </span>
+            ) : (
+              "Create account"
+            )}
           </Button>
 
           <p className="text-center text-sm text-muted-foreground">
