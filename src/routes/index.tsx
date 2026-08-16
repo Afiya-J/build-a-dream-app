@@ -25,13 +25,13 @@ export const Route = createFileRoute("/")({
 
 function Splash() {
   const navigate = useNavigate();
+  const { initialized, user } = useAuth();
 
   useEffect(() => {
-    const timer = window.setTimeout(() => {
-      void navigate({ to: "/login" });
-    }, 1600);
-    return () => window.clearTimeout(timer);
-  }, [navigate]);
+    if (!initialized) return;
+    void navigate({ to: user ? "/home" : "/login", replace: true });
+  }, [initialized, user, navigate]);
+
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-primary px-6 text-center">
