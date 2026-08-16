@@ -3,8 +3,8 @@ import { AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface FormErrorProps {
-  message?: string | null;
-  className?: string;
+  message?: string | null | undefined;
+  className?: string | undefined;
 }
 
 /** Error-state block, ready for backend validation messages in Phase 2. */
