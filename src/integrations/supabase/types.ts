@@ -85,11 +85,91 @@ export type Database = {
           },
         ]
       }
+      resources: {
+        Row: {
+          college_id: string
+          created_at: string
+          department: string
+          description: string | null
+          download_count: number
+          file_path: string | null
+          id: string
+          semester: number
+          subject: string
+          title: string
+          type: string
+          updated_at: string
+          uploader_id: string
+          url: string | null
+          view_count: number
+          year: number
+        }
+        Insert: {
+          college_id: string
+          created_at?: string
+          department: string
+          description?: string | null
+          download_count?: number
+          file_path?: string | null
+          id?: string
+          semester: number
+          subject: string
+          title: string
+          type: string
+          updated_at?: string
+          uploader_id: string
+          url?: string | null
+          view_count?: number
+          year: number
+        }
+        Update: {
+          college_id?: string
+          created_at?: string
+          department?: string
+          description?: string | null
+          download_count?: number
+          file_path?: string | null
+          id?: string
+          semester?: number
+          subject?: string
+          title?: string
+          type?: string
+          updated_at?: string
+          uploader_id?: string
+          url?: string | null
+          view_count?: number
+          year?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resources_college_id_fkey"
+            columns: ["college_id"]
+            isOneToOne: false
+            referencedRelation: "colleges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "resources_uploader_id_fkey"
+            columns: ["uploader_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      increment_resource_download: {
+        Args: { _resource_id: string }
+        Returns: undefined
+      }
+      increment_resource_view: {
+        Args: { _resource_id: string }
+        Returns: undefined
+      }
       is_admin: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
