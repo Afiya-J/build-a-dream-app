@@ -330,8 +330,4 @@ export async function sendMessage(
     .from("marketplace_messages")
     .insert({ conversation_id: conversationId, sender_id: senderId, message: text });
   if (error) throw new Error(MARKET_MESSAGES.sendFailed);
-  await supabase
-    .from("marketplace_conversations")
-    .update({ updated_at: new Date().toISOString() })
-    .eq("id", conversationId);
 }
